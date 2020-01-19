@@ -22,9 +22,9 @@ void CppAmpMethod() {
 
 	parallel_for_each(v1.extent.tile<2, 2>(), [=](tiled_index<2, 2> idx) restrict(amp) {
 		tile_static vtype nums[2][2];
-		nums[idx.local[1]][idx.local[0]] = v2[idx.global]; 
+		nums[idx.local[1]][idx.local[0]] = v2[idx.global];
 		idx.barrier.wait();
-		auto sum = nums[0][0] + nums[0][1] + nums[1][0] + nums[1][1]; 
+		auto sum = nums[0][0] + nums[0][1] + nums[1][0] + nums[1][1];
 		v1[idx.global] = (sum >= 2) ? 1 : 0;
 	});
 	v1.synchronize();
@@ -115,7 +115,6 @@ void CppAmpMethod1() {
 	parallel_for_each(v3i.extent, [=](index<1> i) restrict(amp) {
 		v3i[i] = v3a[i] + v3b[i] + v3c[i] + v3d[i] > 1 ? 1 : 0;
 	});
-	//v1.synchronize();
 	for(int y = 0; y < szy3; y++) {
 		int y0 = y * szx3;
 		for(int x = 0; x < szx3; x++) {
@@ -125,7 +124,29 @@ void CppAmpMethod1() {
 		std::cout << "\n";
 	}
 
-	//array_view< vtype, 2> v3iq(szy3, szx3, v3i); // const
+	array_view< vtype, 2> v3iq(szy3, szx3, v3i); // const
+	//int i = 0;
+	//for(int y = 0; y < szy3; y += 2) {
+	//	int y0 = y * szx3 * 2;
+	//	for(int x = 0; x < szx3; x += 2) {
+	//		v2a[i] = v3iq(y, x);
+	//		v2b[i] = v3iq(y, x+1);
+	//		v2c[i] = v3iq(y+szx3, x);
+	//		v2d[i++] = v3iq(y + szx3, x+1);
+	//	}
+	//}
+	//parallel_for_each(v2i.extent, [=](index<1> i) restrict(amp) {
+	//	v2i[i] = v2a[i] + v2b[i] + v2c[i] + v2d[i] > 1 ? 1 : 0;
+	//});
+	//for(int y = 0; y < szy2; y++) {
+	//	int y0 = y * szx2;
+	//	for(int x = 0; x < szx2; x++) {
+	//		int i = y0 + x;
+	//		std::cout << "  " << v2i[i] << "  ";
+	//	}
+	//	std::cout << "\n";
+	//}
+
 	//parallel_for_each(v3iq.extent.tile<2, 2>(), [=](tiled_index<2, 2> idx) restrict(amp) {
 	//	tile_static vtype nums[2][2];
 	//	nums[idx.local[1]][idx.local[0]] = v3iq[idx.global];
