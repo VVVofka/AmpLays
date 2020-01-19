@@ -22,7 +22,7 @@ void CppAmpMethod() {
 
 	parallel_for_each(v1.extent.tile<2, 2>(), [=](tiled_index<2, 2> idx) restrict(amp) {
 		tile_static vtype nums[2][2];
-		nums[idx.local[1]][idx.local[0]] = v2[idx.global];
+		nums[idx.local[1]][idx.local[0]] = v2[idx.global]; 
 		idx.barrier.wait();
 		auto sum = nums[0][0] + nums[0][1] + nums[1][0] + nums[1][1];
 		v1[idx.global] = (sum >= 2) ? 1 : 0;
