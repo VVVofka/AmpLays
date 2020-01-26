@@ -217,71 +217,15 @@ void CppAmpMethod2() {
 	parallel_for_each(v3.extent, ProcA(v4, v3, szx4));
 	parallel_for_each(v2.extent, ProcA(v3, v2, szx3));
 	parallel_for_each(v1.extent, ProcA(v2, v1, szx2));
-	v3.synchronize();
-	v2.synchronize();
-	v1.synchronize();
-	dumpV(vBase3, szx3, szy3);
-	dumpV(vBase2, szx2, szy2);
-	dumpV(v1, szx1, szy1);
-
-	//array_view< vtype, 2> v3iq(szy3, szx3, v3i); // const
-	////int i = 0;
-	////for(int y = 0; y < szy3; y += 2) {
-	////	int y0 = y * szx3 * 2;
-	////	for(int x = 0; x < szx3; x += 2) {
-	////		v2a[i] = v3iq(y, x);
-	////		v2b[i] = v3iq(y, x+1);
-	////		v2c[i] = v3iq(y+szx3, x);
-	////		v2d[i++] = v3iq(y + szx3, x+1);
-	////	}
-	////}
-	////parallel_for_each(v2i.extent, [=](index<1> i) restrict(amp) {
-	////	v2i[i] = v2a[i] + v2b[i] + v2c[i] + v2d[i] > 1 ? 1 : 0;
-	////});
-	////for(int y = 0; y < szy2; y++) {
-	////	int y0 = y * szx2;
-	////	for(int x = 0; x < szx2; x++) {
-	////		int i = y0 + x;
-	////		std::cout << "  " << v2i[i] << "  ";
-	////	}
-	////	std::cout << "\n";
-	////}
-
-	////parallel_for_each(v3iq.extent.tile<2, 2>(), [=](tiled_index<2, 2> idx) restrict(amp) {
-	////	tile_static vtype nums[2][2];
-	////	nums[idx.local[1]][idx.local[0]] = v3iq[idx.global];
-	////	idx.barrier.wait();
-	////	int sum = nums[0][0] + nums[0][1] + nums[1][0] + nums[1][1];
-	////	//v1[idx.global] = (sum >= 2) ? 1 : 0;
-	////});
-
-	////parallel_for_each(v2a.extent, [=](index<1> i) restrict(amp) {
-	////	auto z = i * 4;
-	////	v2a[i] = v3i[i * 4];
-	////	v2b[i] = v3i[i * 4 + 1];
-	////	v2c[i] = v3i[i * 4 + 2];
-	////	v2d[i] = v3i[i * 4 + 3];
-	////});
-	//for(int y = 0; y < szy2; y++) {
-	//	std::cout << "\n";
-	//	int y0 = y * szx2;
-	//	for(int x = 0; x < szx2; x++) {
-	//		int i = y0 + x;
-	//		std::cout << " " << v2a[i] << " " << v2b[i] << " ";
-	//	}
-	//	std::cout << "\n";
-	//	for(int x = 0; x < szx2; x++) {
-	//		int i = y0 + x;
-	//		std::cout << " " << v2c[i] << " " << v2d[i] << " ";
-	//	}
-	//	std::cout << "\n";
-	//}
+	dumpv(v3.data(), szx3, szy3);
+	dumpv(v2.data(), szx2, szy2);
+	dumpv(v1.data(), szx1, szy1);
 } // //////////////////////////////////////////////////////////////////////////////////
 int main() {
 	//void CppAmpMethod();	CppAmpMethod();
 	void CppAmpMethod2();	CppAmpMethod2();
 	std::cout << "Hello World!\n";
-	return getchar();
+	return 0*getchar();
 } // ///////////////////////////////////////////////////////////////////////////////////
 void dumpV(const vector<vtype> v, int szx, int szy) {
 	for(int y = 0; y < szy; y++) {
@@ -292,7 +236,7 @@ void dumpV(const vector<vtype> v, int szx, int szy) {
 	}
 	cout << endl;
 } // ///////////////////////////////////////////////////////////////////////////////////
-void dumpV(const vtype* v, int szx, int szy) {
+void dumpv(const vtype* v, int szx, int szy) {
 	for(int y = 0; y < szy; y++) {
 		cout << endl;
 		for(int x = 0; x < szx; x++) {

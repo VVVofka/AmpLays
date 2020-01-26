@@ -6,4 +6,4 @@ using namespace std;
 typedef int vtype;
 
 void dumpV(const vector<vtype> v, int szx, int szy);
-void dumpV(const vtype* v, int szx, int szy);
+void dumpv(const vtype* v, int szx, int szy);
