@@ -1,12 +1,12 @@
 #include "AmpLays.h"
 #include "Procs.h"
+using namespace concurrency;
 using namespace std;
 //https://professorweb.ru/my/csharp/optimization/level4/4_6.php
 //https://docs.microsoft.com/ru-ru/cpp/parallel/amp/cpp-amp-overview?view=vs-2017
 //C1001: Project property-> C/C++ -> All options -> Additional options -> /Zc:twoPhase- %(AdditionalOptions)
 // _CONSOLE
-using namespace concurrency;
-void CppAmpMethod() {
+void CppAmpMethod1() {
 	const int szx0 = 2, szy0 = 1;
 	const int szx1 = 2 * szx0, szy1 = 2 * szy0;
 	const int szx2 = 2 * szx1, szy2 = 2 * szy1;
@@ -178,6 +178,9 @@ void CppAmpMethod() {
 //		std::cout << "\n";
 //	}
 //} // //////////////////////////////////////////////////////////////////////////////////
+
+#include "Lay.h"
+#include <cassert>
 void CppAmpMethod2() {
 	const int szx1 = 2, szy1 = 1, sz1 = szx1 * szy1;	// 2 1 2
 	const int szx2 = szx1 * 2, szy2 = szy1 * 2, sz2 = szx2 * szy2;  // 4   2  8
@@ -198,11 +201,9 @@ void CppAmpMethod2() {
 	dumpV(vBase4, szx4, szy4);
 
 	array_view<const vtype, 1> v4(sz4, vBase4);
-	//vector<av *> vav(4);
-	//vav[3] = new av();
 	array_view<vtype, 1> v3(sz3, vBase3);	v3.discard_data();
 	array_view<vtype, 1> v2(sz2, vBase2);	v2.discard_data();
-	av v1(sz1, vBase1);	v1.discard_data();
+	array_view<vtype, 1> v1(sz1, vBase1);	v1.discard_data();
 	//for(int i = 0; i < vBase3.size(); i++) {
 	//	int y = ((2 * i / szx4) * szx4) * 2;
 	//	int x = (2 * i) % szx4;
@@ -223,9 +224,47 @@ void CppAmpMethod2() {
 	dumpv(v2.data(), szx2, szy2);
 	dumpv(v1.data(), szx1, szy1);
 } // //////////////////////////////////////////////////////////////////////////////////
+void CppAmpMethod3() {
+	int szx0 = 16, szy0 = 8, sz0 = szx0 * szy0;	// 16  8  128
+	vector<vtype> vBase4{{
+			0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1,
+			1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0,
+			0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0,
+			0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0,
+			0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1,
+			0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0}};
+	dumpV(vBase4, szx0, szy0);
+	//va[0] = new concurrency::array<vtype, 1>(7);
+	//concurrency::array<vtype, 1> ar4(sz4);
+	//array_view<const vtype, 1> v4(sz0, vBase4);
+
+	vector<array_view<vtype, 1>*> vav(4);
+	vav[0] = new array_view<vtype, 1>(sz0, vBase4);
+	for(int n = 1; n < vav.size(); n++) {
+		auto prevsz = vav[n-1]->extent.size();
+		auto newsz = prevsz / 4;
+		assert(newsz > 0);
+		vav[n] = new array_view<vtype, 1>(newsz);
+	}
+	for(int n = 1; n < vav.size(); n++) {
+		parallel_for_each(vav[n]->extent, ProcAn(*vav[n-1], *vav[n]));
+	}
+	//parallel_for_each(p3->extent, ProcA(v4, *p3, szx0));
+	//parallel_for_each(v2.extent, ProcA(*p3, v2, szx3));
+	//parallel_for_each(v1.extent, ProcA(v2, v1, szx2));
+	for(int n = 0, x = szx0, y = szy0; n < vav.size(); n++) {
+		dumpv(vav[n]->data(), x, y);
+		x /= 2;
+		y /= 2;
+	}
+	//dumpv(v2.data(), szx2, szy2);
+	//dumpv(v1.data(), szx1, szy1);
+} // //////////////////////////////////////////////////////////////////////////////////
 int main() {
-	//void CppAmpMethod();	CppAmpMethod();
-	void CppAmpMethod2();	CppAmpMethod2();
+	//CppAmpMethod1();
+	CppAmpMethod3();
 	std::cout << "Hello World!\n";
 	return 0*getchar();
 } // ///////////////////////////////////////////////////////////////////////////////////
@@ -248,14 +287,3 @@ void dumpv(const vtype* v, int szx, int szy) {
 	cout << endl;
 } // ///////////////////////////////////////////////////////////////////////////////////
 
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
