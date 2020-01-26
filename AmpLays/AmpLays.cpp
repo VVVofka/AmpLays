@@ -182,48 +182,19 @@ void CppAmpMethod2() {
 	const int szx1 = 2, szy1 = 1, sz1 = szx1 * szy1;	// 2 1 2
 	const int szx2 = szx1 * 2, szy2 = szy1 * 2, sz2 = szx2 * szy2;  // 4   2  8
 	const int szx3 = szx2 * 2, szy3 = szy2 * 2, sz3 = szx3 * szy3;	// 8   4  32
-	const int szx4 = szx3 * 2, szy4 = szy3 * 2, sz4 = szx4 * szy4;	// 16  8  128
-	vtype vBase3a[sz3] = {
-		0, 0, 0, 1, 0, 0, 1, 0,
-		0, 0, 0, 0, 0, 1, 0, 0,
-		0, 0, 1, 0, 0, 1, 0, 0,
-		0, 0, 0, 0, 0, 1, 1, 0
-	};
-	vtype vBase3b[sz3] = {
-		1, 1, 0, 1, 0, 0, 0, 0,
-		0, 0, 0, 0, 0, 1, 1, 1,
-		0, 1, 0, 1, 0, 0, 0, 0,
-		1, 0, 1, 1, 0, 0, 1, 1
-	};
-	vtype vBase3c[sz3] = {
-		1, 0, 0, 1, 0, 0, 1, 1,
-		1, 1, 1, 1, 0, 1, 0, 0,
-		0, 1, 0, 1, 1, 0, 1, 0,
-		0, 1, 1, 0, 0, 0, 1, 1
-	};
-	vtype vBase3d[sz3] = {
-		0, 0, 0, 1, 1, 0, 0, 0,
-		0, 1, 0, 0, 0, 1, 1, 0,
-		1, 1, 1, 0, 0, 0, 1, 0,
-		0, 0, 0, 1, 1, 0, 0, 0
-	};
-	vector<vtype> vBase4(sz4);
+	int szx4 = szx3 * 2, szy4 = szy3 * 2, sz4 = szx4 * szy4;	// 16  8  128
+	vector<vtype> vBase4{{
+			0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1,
+			1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0,
+			0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0,
+			0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0,
+			0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1,
+			0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0}};
 	vector<vtype> vBase3(sz3);
 	vector<vtype> vBase2(sz2);
 	vector<vtype> vBase1(sz1);
-	for(int y = 0, i = 0; y < szy4; y += 2) {
-		int y0 = y * szx4;
-		for(int x = 0; x < szx4; x += 2) {
-			vBase4[y0 + x] = vBase3a[i];
-			vBase4[y0 + x + 1] = vBase3b[i];
-			vBase4[y0 + szx4 + x] = vBase3c[i];
-			vBase4[y0 + szx4 + x + 1] = vBase3d[i++];
-		}
-	}
-	//dumpV(vBase3a, szx3, szy3);
-	//dumpV(vBase3b, szx3, szy3);
-	//dumpV(vBase3c, szx3, szy3);
-	//dumpV(vBase3d, szx3, szy3);
 	dumpV(vBase4, szx4, szy4);
 
 	array_view<const vtype, 1> v4(sz4, vBase4);
@@ -251,7 +222,7 @@ void CppAmpMethod2() {
 	v1.synchronize();
 	dumpV(vBase3, szx3, szy3);
 	dumpV(vBase2, szx2, szy2);
-	dumpV(vBase1, szx1, szy1);
+	dumpV(v1, szx1, szy1);
 
 	//array_view< vtype, 2> v3iq(szy3, szx3, v3i); // const
 	////int i = 0;
