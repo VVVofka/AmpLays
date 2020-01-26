@@ -1,6 +1,8 @@
 #pragma once
 #include <amp.h>
 #include <iostream>
+#include <cassert>
+
 using namespace std;
 
 typedef int vtype;

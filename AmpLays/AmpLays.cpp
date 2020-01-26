@@ -180,7 +180,6 @@ void CppAmpMethod1() {
 //} // //////////////////////////////////////////////////////////////////////////////////
 
 #include "Lay.h"
-#include <cassert>
 void CppAmpMethod2() {
 	const int szx1 = 2, szy1 = 1, sz1 = szx1 * szy1;	// 2 1 2
 	const int szx2 = szx1 * 2, szy2 = szy1 * 2, sz2 = szx2 * szy2;  // 4   2  8
@@ -236,34 +235,25 @@ void CppAmpMethod3() {
 			0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1,
 			0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0}};
 	dumpV(vBase4, szx0, szy0);
-	//va[0] = new concurrency::array<vtype, 1>(7);
-	//concurrency::array<vtype, 1> ar4(sz4);
-	//array_view<const vtype, 1> v4(sz0, vBase4);
-
 	vector<array_view<vtype, 1>*> vav(4);
+	vector<int> vx(4);
 	vav[0] = new array_view<vtype, 1>(sz0, vBase4);
+	vx[0] = szx0;
 	for(int n = 1; n < vav.size(); n++) {
 		auto prevsz = vav[n-1]->extent.size();
 		auto newsz = prevsz / 4;
 		assert(newsz > 0);
 		vav[n] = new array_view<vtype, 1>(newsz);
+		vx[n] = vx[n - 1] / 2;
 	}
 	for(int n = 1; n < vav.size(); n++) {
-		parallel_for_each(vav[n]->extent, ProcAn(*vav[n-1], *vav[n]));
+		parallel_for_each(vav[n]->extent, ProcA(*vav[n-1], *vav[n], vx[n-1]));
 	}
-	//parallel_for_each(p3->extent, ProcA(v4, *p3, szx0));
-	//parallel_for_each(v2.extent, ProcA(*p3, v2, szx3));
-	//parallel_for_each(v1.extent, ProcA(v2, v1, szx2));
-	for(int n = 0, x = szx0, y = szy0; n < vav.size(); n++) {
+	for(int n = 0, x = szx0, y = szy0; n < vav.size(); n++, x /=2, y/=2) {
 		dumpv(vav[n]->data(), x, y);
-		x /= 2;
-		y /= 2;
 	}
-	//dumpv(v2.data(), szx2, szy2);
-	//dumpv(v1.data(), szx1, szy1);
 } // //////////////////////////////////////////////////////////////////////////////////
 int main() {
-	//CppAmpMethod1();
 	CppAmpMethod3();
 	std::cout << "Hello World!\n";
 	return 0*getchar();
