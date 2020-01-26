@@ -236,7 +236,7 @@ void CppAmpMethod3() {
 			0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0}};
 	dumpV(vBase4, szx0, szy0);
 	vector<array_view<vtype, 1>*> vav(4);
-	vector<int> vx(4);
+	vector<int> vx(4);	// длины рядов х
 	vav[0] = new array_view<vtype, 1>(sz0, vBase4);
 	vx[0] = szx0;
 	for(int n = 1; n < vav.size(); n++) {
@@ -244,6 +244,7 @@ void CppAmpMethod3() {
 		auto newsz = prevsz / 4;
 		assert(newsz > 0);
 		vav[n] = new array_view<vtype, 1>(newsz);
+		assert(vx[n - 1] / 2 > 0);
 		vx[n] = vx[n - 1] / 2;
 	}
 	for(int n = 1; n < vav.size(); n++) {
