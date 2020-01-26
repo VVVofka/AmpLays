@@ -181,7 +181,7 @@ void CppAmpMethod() {
 void CppAmpMethod2() {
 	const int szx1 = 2, szy1 = 1, sz1 = szx1 * szy1;	// 2 1 2
 	const int szx2 = szx1 * 2, szy2 = szy1 * 2, sz2 = szx2 * szy2;  // 4   2  8
-	const int szx3 = szx2 * 2, szy3 = szy2 * 2, sz3 = szx3 * szy3;	// 8   4  32
+	int szx3 = szx2 * 2, szy3 = szy2 * 2, sz3 = szx3 * szy3;	// 8   4  32
 	int szx4 = szx3 * 2, szy4 = szy3 * 2, sz4 = szx4 * szy4;	// 16  8  128
 	vector<vtype> vBase4{{
 			0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0,
@@ -198,9 +198,11 @@ void CppAmpMethod2() {
 	dumpV(vBase4, szx4, szy4);
 
 	array_view<const vtype, 1> v4(sz4, vBase4);
+	//vector<av *> vav(4);
+	//vav[3] = new av();
 	array_view<vtype, 1> v3(sz3, vBase3);	v3.discard_data();
 	array_view<vtype, 1> v2(sz2, vBase2);	v2.discard_data();
-	array_view<vtype, 1> v1(sz1, vBase1);	v1.discard_data();
+	av v1(sz1, vBase1);	v1.discard_data();
 	//for(int i = 0; i < vBase3.size(); i++) {
 	//	int y = ((2 * i / szx4) * szx4) * 2;
 	//	int x = (2 * i) % szx4;
