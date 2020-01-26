@@ -1,4 +1,5 @@
 #include "AmpLays.h"
+#include "Procs.h"
 using namespace std;
 //https://professorweb.ru/my/csharp/optimization/level4/4_6.php
 //https://docs.microsoft.com/ru-ru/cpp/parallel/amp/cpp-amp-overview?view=vs-2017

@@ -160,7 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AmpLays.h" />
-    <ClInclude Include="ProcA.h" />
+    <ClInclude Include="Procs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

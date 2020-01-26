@@ -23,7 +23,7 @@
     <ClInclude Include="AmpLays.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ProcA.h">
+    <ClInclude Include="Procs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
