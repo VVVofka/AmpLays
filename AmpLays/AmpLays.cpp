@@ -237,20 +237,15 @@ void CppAmpMethod2() {
 	//	cout << i << " y:" << y << " x:" << x << " x+y:" << y + x << " x+y+1:" <<y + x + 1<<" y+x+szx4:"<< y + x + szx4<< " y+x+szx4+1:"<< y + x + szx4 + 1<< endl;
 	//}
 	//dumpV(vBase3, szx3, szy3);
-	parallel_for_each(v3.extent, [=](index<1> i) restrict(amp) {
-		//index<1> y = (((2 * i) / szx4) * szx4) * 2;
-		//index<1> x = (2 * i) % szx4;
-		index<1> j = (((2 * i) / szx4) * szx4) * 2 + (2 * i) % szx4;
-		v3[i] = v4[j] + v4[j + 1] + v4[j + szx4] + v4[j + szx4 + 1] > 1 ? 1 : 0;
-	});
-	parallel_for_each(v2.extent, [=](index<1> i) restrict(amp) {
-		index<1> j = (((2 * i) / szx3) * szx3) * 2 + (2 * i) % szx3;
-		v2[i] = v3[j] + v3[j + 1] + v3[j + szx3] + v3[j + szx3 + 1] > 1 ? 1 : 0;
-	});
-	parallel_for_each(v1.extent, [=](index<1> i) restrict(amp) {
-		index<1> j = (((2 * i) / szx2) * szx2) * 2 + (2 * i) % szx2;
-		v1[i] = v2[j] + v2[j + 1] + v2[j + szx2] + v2[j + szx2 + 1] > 1 ? 1 : 0;
-	});
+	//parallel_for_each(v3.extent, [=](index<1> i) restrict(amp) {
+	//	index<1> y = (((2 * i) / szx4) * szx4) * 2;
+	//	index<1> x = (2 * i) % szx4;
+	//	index<1> j = y + x;
+	//	v3[i] = v4[j] + v4[j + 1] + v4[j + szx4] + v4[j + szx4 + 1] > 1 ? 1 : 0;
+	//});
+	parallel_for_each(v3.extent, ProcA(v4, v3, szx4));
+	parallel_for_each(v2.extent, ProcA(v3, v2, szx3));
+	parallel_for_each(v1.extent, ProcA(v2, v1, szx2));
 	v3.synchronize();
 	v2.synchronize();
 	v1.synchronize();
