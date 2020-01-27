@@ -13,3 +13,4 @@ void dumpv(const vtype* v, int szx, int szy);
 void CppAmpMethod1();
 void CppAmpMethod2();
 void CppAmpMethod3();
+void CppAmpMethod4();
