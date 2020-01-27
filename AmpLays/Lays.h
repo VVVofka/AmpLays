@@ -2,8 +2,8 @@
 #include "Lay.h"
 class Lays {
 public:
-	vector<Lay> vlays;
-	Lays(int szx_0, int szy_0, vector<vtype>* vArray) {
+	std::vector<Lay> vlays;
+	Lays(int szx_0, int szy_0, std::vector<vtype>* vArray) {
 		assert(szx_0 > 1 && szy_0 > 1);
 		vlays.push_back(Lay(szx_0, szy_0, vArray));
 		int n = 0;
