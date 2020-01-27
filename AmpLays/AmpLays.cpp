@@ -135,10 +135,10 @@ void CppAmpMethod4() {
 		parallel_for_each(vlays[n].v->extent, ProcA(*vlays[n - 1].v, *vlays[n].v, vlays[n - 1].szx));
 	}
 	for (int n = 0, x = szx0, y = szy0; n < vlays.size(); n++, x /= 2, y /= 2) {
-		dumpv(vlays[n].v->data(), x, y);
+		//dumpv(vlays[n].v->data(), x, y);
+		vlays[n].dump();
+		delete vlays[n].v;
 	}
-	for (int l=0; l<vlays.size(); l++)
-		delete vlays[l].v;
 } // //////////////////////////////////////////////////////////////////////////////////
 int main() {
 	CppAmpMethod4();
