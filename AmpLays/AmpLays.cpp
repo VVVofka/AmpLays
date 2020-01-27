@@ -6,17 +6,19 @@
 //C1001: Project property-> C/C++ -> All options -> Additional options -> /Zc:twoPhase- %(AdditionalOptions)
 // _CONSOLE
 void CppAmpMethod1() {
-	std::vector<vtype> vBase4{ {
-			0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0,
-			1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1,
-			1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0,
-			0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0,
-			0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0,
-			0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1,
-			0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0 } };
+	std::vector<vtype> vBase4{{
+			0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1,
+			1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0,
+			0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1,
+			0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1,
+			0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0,
+			0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1,
+			1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1
+		}};
 	Lays lays(16, 8, &vBase4);
-	for (int n = 1; n < lays.size(); n++) {
+	for(int n = 1; n < lays.size(); n++) {
 		parallel_for_each(lays(n)->extent, ProcA(*lays(n - 1), *lays(n), lays[n - 1]->szx));
 	}
 	lays.dump();
@@ -24,21 +26,21 @@ void CppAmpMethod1() {
 int main() {
 	CppAmpMethod1();
 	std::cout << "Hello World!\n";
-	return 0;// *getchar();
+	return 0 * getchar();
 } // ///////////////////////////////////////////////////////////////////////////////////
 void dumpV(const std::vector<vtype> v, int szx, int szy) {
-	for (int y = 0; y < szy; y++) {
+	for(int y = 0; y < szy; y++) {
 		std::cout << std::endl;
-		for (int x = 0; x < szx; x++) {
+		for(int x = 0; x < szx; x++) {
 			std::cout << " " << v[y * szx + x];
 		}
 	}
 	std::cout << std::endl;
 } // ///////////////////////////////////////////////////////////////////////////////////
 void dumpv(const vtype* v, int szx, int szy) {
-	for (int y = 0; y < szy; y++) {
+	for(int y = 0; y < szy; y++) {
 		std::cout << std::endl;
-		for (int x = 0; x < szx; x++) {
+		for(int x = 0; x < szx; x++) {
 			std::cout << " " << v[y * szx + x];
 		}
 	}
