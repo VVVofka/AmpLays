@@ -15,7 +15,7 @@ public:
 		szy = sz_y;
 		sz = szx * szy;
 		v = new array_view<vtype, 1>(sz, *p_v);
-		layDn = nullptr;
+		layDn = layUp = nullptr;
 	} // //////////////////////////////////////////////////////////////////////////////////
 	Lay(Lay* lay_Dn, Lay* lay_Up = nullptr) {
 		layDn = lay_Dn;
