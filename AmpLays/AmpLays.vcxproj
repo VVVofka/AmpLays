@@ -162,6 +162,7 @@
   <ItemGroup>
     <ClInclude Include="AmpLays.h" />
     <ClInclude Include="Lay.h" />
+    <ClInclude Include="Lays.h" />
     <ClInclude Include="Procs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

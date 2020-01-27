@@ -29,5 +29,8 @@
     <ClInclude Include="Lay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Lays.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #include "AmpLays.h"
 #include "Procs.h"
-#include "Lay.h"
+#include "Lays.h"
 
 using namespace concurrency;
 using namespace std;
@@ -134,14 +134,32 @@ void CppAmpMethod4() {
 	for (int n = 1; n < vlays.size(); n++) {
 		parallel_for_each(vlays[n].v->extent, ProcA(*vlays[n - 1].v, *vlays[n].v, vlays[n - 1].szx));
 	}
-	for (int n = 0, x = szx0, y = szy0; n < vlays.size(); n++, x /= 2, y /= 2) {
-		//dumpv(vlays[n].v->data(), x, y);
+	for (int n = 0; n < vlays.size(); n++) {
 		vlays[n].dump();
 		delete vlays[n].v;
 	}
 } // //////////////////////////////////////////////////////////////////////////////////
+void CppAmpMethod5() {
+	vector<vtype> vBase4{ {
+			0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0,
+			1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0,
+			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1,
+			1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0,
+			0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0,
+			0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0,
+			0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1,
+			0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0 } };
+	Lays lays(16, 8, &vBase4);
+	for (int n = 1; n < lays.size(); n++) {
+		parallel_for_each(lays(n)->extent, ProcA(*lays(n - 1), *lays(n), lays[n - 1]->szx));
+	}
+	for (int n = 0; n < lays.size(); n++) {
+		lays[n]->dump();
+		delete lays(n);
+	}
+} // //////////////////////////////////////////////////////////////////////////////////
 int main() {
-	CppAmpMethod4();
+	CppAmpMethod5();
 	std::cout << "Hello World!\n";
 	return 0;// *getchar();
 } // ///////////////////////////////////////////////////////////////////////////////////

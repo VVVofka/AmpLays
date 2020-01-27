@@ -14,3 +14,4 @@ void CppAmpMethod1();
 void CppAmpMethod2();
 void CppAmpMethod3();
 void CppAmpMethod4();
+void CppAmpMethod5();
