@@ -10,16 +10,14 @@ public:
 	array_view<vtype, 1>* v;
 	Lay* layDn;
 	Lay* layUp;
-	void Create0(int sz_x, int sz_y, vector<vtype>* p_v) {
-		assert(v == 0);
+	Lay(int sz_x, int sz_y, vector<vtype>* p_v) {
 		szx = sz_x;
 		szy = sz_y;
 		sz = szx * szy;
 		v = new array_view<vtype, 1>(sz, *p_v);
 		layDn = nullptr;
 	} // //////////////////////////////////////////////////////////////////////////////////
-	void Create(Lay* lay_Dn, Lay* lay_Up = nullptr) {
-		assert(v == 0);
+	Lay(Lay* lay_Dn, Lay* lay_Up = nullptr) {
 		layDn = lay_Dn;
 		szx = layDn->szx / 2;
 		szy = layDn->szy / 2;

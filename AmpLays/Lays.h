@@ -5,15 +5,15 @@ public:
 	vector<Lay> vlays;
 	Lays(int szx_0, int szy_0, vector<vtype>* vArray) {
 		assert(szx_0 > 1 && szy_0 > 1);
-		vlays.push_back(Lay());
+		vlays.push_back(Lay(szx_0, szy_0, vArray));
 		int n = 0;
-		vlays[n].Create0(szx_0, szy_0, vArray);
+		//vlays[n].Create0();
 		vlays[n].dump();
 		while (vlays[n].sz > 1 && vlays[n].szy > 1) {
 			n++;
 			Lay* layUp = n + 1 < vlays.size() ? &vlays[n + 1] : nullptr;
-			vlays.push_back(Lay());
-			vlays[n].Create(&vlays[n - 1], layUp);
+			vlays.push_back(Lay(&vlays[n - 1], layUp));
+//			vlays[n].Create();
 		}
 	} // ///////////////////////////////////////////////////////////////
 	size_t size() {

@@ -114,30 +114,30 @@ void CppAmpMethod3() {
 	}
 } // //////////////////////////////////////////////////////////////////////////////////
 void CppAmpMethod4() {
-	int szx0 = 16, szy0 = 8, sz0 = szx0 * szy0;	// 16  8  128
-	vector<vtype> vBase4{ {
-			0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0,
-			1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0,
-			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1,
-			1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0,
-			0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0,
-			0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0,
-			0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1,
-			0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0 } };
-	dumpV(vBase4, szx0, szy0);
-	vector<Lay> vlays(4);
-	vlays[0].Create0(szx0, szy0, &vBase4);
-	for (int n = 1; n < vlays.size(); n++) {
-		Lay* uplay = n + 1 < vlays.size() ? &vlays[n + 1] : nullptr;
-		vlays[n].Create(&vlays[n - 1], uplay);
-	}
-	for (int n = 1; n < vlays.size(); n++) {
-		parallel_for_each(vlays[n].v->extent, ProcA(*vlays[n - 1].v, *vlays[n].v, vlays[n - 1].szx));
-	}
-	for (int n = 0; n < vlays.size(); n++) {
-		vlays[n].dump();
-		delete vlays[n].v;
-	}
+	//int szx0 = 16, szy0 = 8, sz0 = szx0 * szy0;	// 16  8  128
+	//vector<vtype> vBase4{ {
+	//		0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0,
+	//		1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0,
+	//		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1,
+	//		1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0,
+	//		0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0,
+	//		0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0,
+	//		0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1,
+	//		0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0 } };
+	//dumpV(vBase4, szx0, szy0);
+	//vector<Lay> vlays(4);
+	//vlays[0].Create0(szx0, szy0, &vBase4);
+	//for (int n = 1; n < vlays.size(); n++) {
+	//	Lay* uplay = n + 1 < vlays.size() ? &vlays[n + 1] : nullptr;
+	//	vlays[n].Create(&vlays[n - 1], uplay);
+	//}
+	//for (int n = 1; n < vlays.size(); n++) {
+	//	parallel_for_each(vlays[n].v->extent, ProcA(*vlays[n - 1].v, *vlays[n].v, vlays[n - 1].szx));
+	//}
+	//for (int n = 0; n < vlays.size(); n++) {
+	//	vlays[n].dump();
+	//	delete vlays[n].v;
+	//}
 } // //////////////////////////////////////////////////////////////////////////////////
 void CppAmpMethod5() {
 	vector<vtype> vBase4{ {
