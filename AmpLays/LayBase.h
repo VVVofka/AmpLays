@@ -5,13 +5,13 @@
 typedef int vtype;
 typedef concurrency::array_view<vtype, 1> av;
 
-class LayBase{
+class LayBase {
 public:
-	int szx=0;
-	int szy=0;
-	int sz=0;
+	int szx = 0;
+	int szy = 0;
+	int sz = 0;
 
-	av* v=nullptr;
+	av* v = nullptr;
 
 	void dump() {
 		for (int y = 0; y < szy; y++) {
