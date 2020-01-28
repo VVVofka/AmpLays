@@ -32,5 +32,11 @@
     <ClInclude Include="Lays.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LayBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lay0.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

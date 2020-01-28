@@ -162,6 +162,8 @@
   <ItemGroup>
     <ClInclude Include="AmpLays.h" />
     <ClInclude Include="Lay.h" />
+    <ClInclude Include="Lay0.h" />
+    <ClInclude Include="LayBase.h" />
     <ClInclude Include="Lays.h" />
     <ClInclude Include="Procs.h" />
   </ItemGroup>
