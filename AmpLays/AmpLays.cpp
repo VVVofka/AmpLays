@@ -19,6 +19,9 @@ void CppAmpMethod1() {
 		}};
 	Lays lays(16, 8, &vBase4);
 	for(int n = 1; n < lays.size(); n++) {
+		LayBase* prev = lays[n - 1];
+		LayBase* cur = lays[n];
+		_RPT5(0, "%d  %d*%d %d*%d\n", n, prev->szx, prev->szy, cur->szx, cur->szy);
 		parallel_for_each(lays(n)->extent, ProcA(*lays(n - 1), *lays(n), lays[n - 1]->szx));
 	}
 	lays.dump();

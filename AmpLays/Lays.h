@@ -18,17 +18,23 @@ public:
 		laylast = LayLast(szx, szy);
 	} // ///////////////////////////////////////////////////////////////
 	size_t size() {
-		return vlays.size();
+		return vlays.size() + 2;
 	} // ////////////////////////////////////////////////////////////////
-	Lay* operator[](int n_lay) {
-		return &vlays[n_lay];
+	LayBase* operator[](int n_lay) {
+		if (n_lay == 0)
+			return &lay0;
+		if (n_lay == size() - 1)
+			return &laylast;
+		return &vlays[n_lay - 1];
 	} // //////////////////////////////////////////////////////////////
 	array_view<vtype, 1>* operator()(int n_lay) {
-		return vlays[n_lay].v;
+		return this->operator[](n_lay)->v;
 	} // //////////////////////////////////////////////////////////////
 	void dump() {
+		lay0.dump();
 		for (int n = 0; n < vlays.size(); n++)
 			vlays[n].dump();
+		laylast.dump();
 	} // //////////////////////////////////////////////////////////////
 }; // ********************************************************************
 
