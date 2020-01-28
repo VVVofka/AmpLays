@@ -19,7 +19,7 @@ void CppAmpMethod0() {
 		}};
 	int szy = 8, szx = 16;
 	Lays lays(szy, szx, vBase);
-	parallel_for_each(lays(1)->extent, ProcA2(lays(0)->section(1, 1, szy, szx), *lays(1)));
+	parallel_for_each(lays(1)->extent, ProcA2(lays.lay0.Shift(), *lays(1)));
 	for(int n = 2; n < lays.size(); n++) {
 		LayBase* prev = lays[n - 1];
 		LayBase* cur = lays[n];

@@ -41,5 +41,8 @@
     <ClInclude Include="LayLast.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Shifter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
