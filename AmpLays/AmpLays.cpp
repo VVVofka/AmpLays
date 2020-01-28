@@ -24,11 +24,13 @@ void CppAmpMethod0() {
 	//dumpv(v01);
 	//dumpv(v0);
 	//dumpv(v1);
-	Lays lays(8, 16, vBase);
-	for(int n = 1; n < lays.size(); n++) {
+	int szy = 8, szx = 16;
+	Lays lays(szy, szx, vBase);
+	parallel_for_each(lays(1)->extent, ProcA2(lays(0)->section(1, 1, szy, szx), *lays(1)));
+	for(int n = 2; n < lays.size(); n++) {
 		LayBase* prev = lays[n - 1];
 		LayBase* cur = lays[n];
-		_RPT5(0, "%d  %d*%d %d*%d\n", n, prev->szy(), prev->szx(), cur->szy(), cur->szx());
+		//_RPT5(0, "%d  %d*%d %d*%d\n", n, prev->szy(), prev->szx(), cur->szy(), cur->szx());
 		parallel_for_each(lays(n)->extent, ProcA2(*prev->v, *cur->v));
 	}
 	lays.dump();
