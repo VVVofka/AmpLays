@@ -164,6 +164,7 @@
     <ClInclude Include="Lay.h" />
     <ClInclude Include="Lay0.h" />
     <ClInclude Include="LayBase.h" />
+    <ClInclude Include="LayLast.h" />
     <ClInclude Include="Lays.h" />
     <ClInclude Include="Procs.h" />
   </ItemGroup>

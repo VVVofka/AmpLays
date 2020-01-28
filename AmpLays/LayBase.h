@@ -7,12 +7,11 @@ typedef concurrency::array_view<vtype, 1> av;
 
 class LayBase{
 public:
-	int szx;
-	int szy;
-	int sz;
+	int szx=0;
+	int szy=0;
+	int sz=0;
 
-	av* v;
-	Lay* layUp;
+	av* v=nullptr;
 
 	void dump() {
 		for (int y = 0; y < szy; y++) {
