@@ -1,23 +1,25 @@
 #pragma once
 #include <amp.h>
 #include <cassert>
-
 typedef int vtype;
-typedef concurrency::array_view<vtype, 1> av;
 
 class LayBase {
 public:
-	int szx = 0;
-	int szy = 0;
-	int sz = 0;
-
-	av* v = nullptr;
+	LayBase() { v = nullptr; }
+	~LayBase() {
+		//if(v != nullptr) delete v;
+	}
+	concurrency::array_view<vtype, 2>* v;
+	int szy() { return v->extent[0]; }
+	int szx() { return v->extent[1]; }
 
 	void dump() {
-		for (int y = 0; y < szy; y++) {
+		std::cout << "   y:" << v->extent[0] << " x:" << v->extent[1];
+		for(int y = 0; y < v->extent[0]; y++) {
 			std::cout << std::endl;
-			for (int x = 0; x < szx; x++) {
-				std::cout << " " << *(v->data() + y * szx + x);
+			for(int x = 0; x < v->extent[1]; x++) {
+				vtype tmp = v->operator()(y, x);
+				std::cout << " " << tmp;
 			}
 		}
 		std::cout << std::endl;

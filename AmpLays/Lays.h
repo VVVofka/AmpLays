@@ -8,14 +8,16 @@ public:
 	std::vector<Lay> vlays;
 	LayLast laylast;
 
-	Lays(int szx, int szy, std::vector<vtype>* vArray) {
-		assert(szx > 2 && szy > 2);
-		lay0 = Lay0(szx, szy, vArray);
+	Lays(int szy, int szx, std::vector<vtype>& vArray) {
+		assert(szy > 2 && szx > 2);
+		lay0 = Lay0(szy, szx, vArray);
 		lay0.dump();
-		while ((szx /= 2) > 1 && (szy /= 2) > 1) {
-			vlays.push_back(Lay(szx, szy));
+		while (true) {
+			szy /= 2, szx /= 2;
+			if(szy <= 1 || szx <= 1) break;
+			vlays.push_back(Lay(szy, szx));
 		}
-		laylast = LayLast(szx, szy);
+		laylast = LayLast(szy, szx);
 	} // ///////////////////////////////////////////////////////////////
 	size_t size() {
 		return vlays.size() + 2;
@@ -27,7 +29,7 @@ public:
 			return &laylast;
 		return &vlays[n_lay - 1];
 	} // //////////////////////////////////////////////////////////////
-	array_view<vtype, 1>* operator()(int n_lay) {
+	array_view<vtype, 2>* operator()(int n_lay) {
 		return this->operator[](n_lay)->v;
 	} // //////////////////////////////////////////////////////////////
 	void dump() {
