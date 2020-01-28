@@ -6,9 +6,6 @@ typedef int vtype;
 class LayBase {
 public:
 	LayBase() { v = nullptr; }
-	~LayBase() {
-		//if(v != nullptr) delete v;
-	}
 	concurrency::array_view<vtype, 2>* v;
 	int szy() { return v->extent[0]; }
 	int szx() { return v->extent[1]; }

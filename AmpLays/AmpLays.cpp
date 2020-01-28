@@ -17,13 +17,6 @@ void CppAmpMethod0() {
 			0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1,
 			1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1
 		}};
-	//concurrency::array_view<vtype, 2> v01(9, 17, vBase);
-	//concurrency::array_view<vtype, 2> v0(v01.section(0, 0, 8, 16));
-	//concurrency::array_view<vtype, 2> v1(4, 8);
-	//parallel_for_each(v1.extent, ProcA2(v0, v1));
-	//dumpv(v01);
-	//dumpv(v0);
-	//dumpv(v1);
 	int szy = 8, szx = 16;
 	Lays lays(szy, szx, vBase);
 	parallel_for_each(lays(1)->extent, ProcA2(lays(0)->section(1, 1, szy, szx), *lays(1)));
@@ -34,7 +27,6 @@ void CppAmpMethod0() {
 		parallel_for_each(lays(n)->extent, ProcA2(*prev->v, *cur->v));
 	}
 	lays.dump();
-	//parallel_for_each(v1.extent, ProcA2(v0, v1));
 } // //////////////////////////////////////////////////////////////////////////
 void CppAmpMethod1() {
 	//std::vector<vtype> vBase{ {
