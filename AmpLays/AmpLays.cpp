@@ -40,7 +40,7 @@ void CppAmpMethod0() {
 		LayBase* next = lays[nlay - 1];
 		parallel_for_each(cur->v->extent, ProcT2(*cur->v, *next->v));
 	}
-	// TODO: mover here 3+
+	// TODO: mover here 4
 	lays.dump();
 } // //////////////////////////////////////////////////////////////////////////
 void CppAmpMethod1() {
