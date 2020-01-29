@@ -22,7 +22,7 @@ void CppAmpMethod0() {
 		vBase[i].a = vBaseI[i];
 	int szy = 8, szx = 16;
 	Lays lays(szy, szx, vBase); // main init
-	lays.lay0.dump();
+	lays.lay0.dumpall();
 	assert(lays.size() > 3);
 	parallel_for_each(lays.v(1)->extent, ProcA2(lays.lay0.Shift(), *lays.v(1)));
 	for(int nlay = 2; nlay < lays.size(); nlay++) {
