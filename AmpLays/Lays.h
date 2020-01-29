@@ -11,7 +11,7 @@ public:
 	Lays(int szy, int szx, std::vector<vtype>& vArray) {
 		assert(szy > 2 && szx > 2);
 		lay0 = Lay0(szy, szx, vArray);
-		lay0.dump();
+		//lay0.dump();
 		while (true) {
 			szy /= 2, szx /= 2;
 			if(szy % 2 || szx % 2) break;

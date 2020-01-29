@@ -2,8 +2,13 @@
 #include <amp.h>
 #include <cassert>
 #include "XY.h"
-typedef int vtype;
+//typedef int vtype;
+struct vtype {
+	int a=0;
+	YX xy;
+};
 typedef concurrency::array_view<vtype, 2> av2;
+typedef concurrency::array_view<const vtype, 2> avc2;
 
 class LayBase {
 public:
@@ -19,7 +24,7 @@ public:
 			std::cout << std::endl;
 			for(int x = 0; x < v.extent[1]; x++) {
 				vtype tmp = v(y, x);
-				std::cout << " " << tmp;
+				std::cout << " " << tmp.a;
 			}
 		}
 		std::cout << std::endl;
