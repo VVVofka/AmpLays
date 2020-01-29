@@ -44,5 +44,8 @@
     <ClInclude Include="Shifter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="XY.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

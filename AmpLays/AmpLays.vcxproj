@@ -168,6 +168,7 @@
     <ClInclude Include="Lays.h" />
     <ClInclude Include="Procs.h" />
     <ClInclude Include="Shifter.h" />
+    <ClInclude Include="XY.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

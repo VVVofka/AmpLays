@@ -14,7 +14,7 @@ public:
 		lay0.dump();
 		while (true) {
 			szy /= 2, szx /= 2;
-			if(szy <= 1 || szx <= 1) break;
+			if(szy % 2 || szx % 2) break;
 			vlays.push_back(Lay(szy, szx));
 		}
 		laylast = LayLast(szy, szx);

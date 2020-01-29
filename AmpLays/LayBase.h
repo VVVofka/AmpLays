@@ -1,6 +1,7 @@
 #pragma once
 #include <amp.h>
 #include <cassert>
+#include "XY.h"
 typedef int vtype;
 typedef concurrency::array_view<vtype, 2> av2;
 
@@ -8,6 +9,7 @@ class LayBase {
 public:
 	LayBase() { v = nullptr; }
 	av2* v;
+	
 	int szy() { return v->extent[0]; }
 	int szx() { return v->extent[1]; }
 
