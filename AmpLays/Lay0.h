@@ -3,6 +3,7 @@
 #include "Shifter.h"
 class Lay0 : public LayBase {
 public:
+	av2* vsh;
 	Shifter shifter;
 	Lay0() {}
 	Lay0(int szy, int szx, std::vector<vtype>& pv) {
@@ -14,6 +15,7 @@ public:
 	// ////////////////////////////////////////////////////////////////////////////
 	av2 Shift() {
 		shifter.Run();
+		auto av = v->section(shifter.y(), shifter.x(), szy(), szx());
 		auto av = v->section(shifter.y(), shifter.x(), szy(), szx());
 		//shifter.dump(); dump(&av);
 		return av;
