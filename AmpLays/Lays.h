@@ -29,7 +29,7 @@ public:
 			return &laylast;
 		return &vlays[n_lay - 1];
 	} // //////////////////////////////////////////////////////////////
-	array_view<vtype, 2>* operator()(int n_lay) {
+	av2* v(int n_lay) {
 		return this->operator[](n_lay)->v;
 	} // //////////////////////////////////////////////////////////////
 	void dump() {

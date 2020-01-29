@@ -19,12 +19,12 @@ void CppAmpMethod0() {
 		}};
 	int szy = 8, szx = 16;
 	Lays lays(szy, szx, vBase);
-	parallel_for_each(lays(1)->extent, ProcA2(lays.lay0.Shift(), *lays(1)));
+	parallel_for_each(lays.v(1)->extent, ProcA2(lays.lay0.Shift(), *lays.v(1)));
 	for(int n = 2; n < lays.size(); n++) {
 		LayBase* prev = lays[n - 1];
 		LayBase* cur = lays[n];
 		//_RPT5(0, "%d  %d*%d %d*%d\n", n, prev->szy(), prev->szx(), cur->szy(), cur->szx());
-		parallel_for_each(lays(n)->extent, ProcA2(*prev->v, *cur->v));
+		parallel_for_each(cur->v->extent, ProcA2(*prev->v, *cur->v));
 	}
 	lays.dump();
 } // //////////////////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ void dumpv(const vtype* v, int szy, int szx) {
 	}
 	std::cout << std::endl;
 } // ///////////////////////////////////////////////////////////////////////////////////
-void dumpv(const concurrency::array_view<vtype, 2>& v) {
+void dumpv(const av2& v) {
 	std::cout << "    " << v.extent[0] << " x " << v.extent[1];
 	for(int y = 0; y < v.extent[0]; y++) {
 		std::cout << std::endl;

@@ -5,10 +5,10 @@ using namespace concurrency;
 class ProcA2 {
 private:
 	array_view<const vtype, 2> m_dn;
-	array_view<vtype, 2> m_up;
+	av2 m_up;
 public:
 	ProcA2(const array_view<const vtype, 2>& vDnIn,
-		const array_view<vtype, 2>& vUpOut)
+		const av2& vUpOut)
 		: m_dn(vDnIn), m_up(vUpOut) {}
 	void operator()(index<2> idx) const restrict(amp) {
 		auto y = 2 * idx[0];

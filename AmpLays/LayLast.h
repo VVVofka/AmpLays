@@ -4,7 +4,7 @@ class LayLast :	public LayBase{
 public:
 	LayLast() {}
 	LayLast(int szy, int szx) {
-		v = new concurrency::array_view<vtype, 2>(szy, szx);
+		v = new av2(szy, szx);
 	} // ////////////////////////////////////////////////////////////////////////////////////
 }; // ***************************************************************************
 
