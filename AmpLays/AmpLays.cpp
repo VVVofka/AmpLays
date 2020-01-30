@@ -41,7 +41,7 @@ void CppAmpMethod0() {
 		parallel_for_each(cur->v->extent, ProcT2(*cur->v, *next->v));
 	}
 	// TODO: mover here 
-	lays.dump();
+	lays.dumpYX();
 } // //////////////////////////////////////////////////////////////////////////
 void CppAmpMethod1() {
 	//std::vector<vtype> vBase{ {

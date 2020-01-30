@@ -4,7 +4,7 @@
 #include "XY.h"
 //typedef int vtype;
 struct vtype {
-	int a=0;
+	int a = 0;
 	YX xy;
 };
 typedef concurrency::array_view<vtype, 2> av2;
@@ -14,22 +14,44 @@ class LayBase {
 public:
 	LayBase() { v = nullptr; }
 	av2* v;
-	
+
 	int szy() { return v->extent[0]; }
 	int szx() { return v->extent[1]; }
 
 	void dump(const av2& v) {
 		std::cout << "   y:" << v.extent[0] << " x:" << v.extent[1];
-		for(int y = 0; y < v.extent[0]; y++) {
+		for (int y = 0; y < v.extent[0]; y++) {
 			std::cout << std::endl;
-			for(int x = 0; x < v.extent[1]; x++) {
+			for (int x = 0; x < v.extent[1]; x++) {
 				vtype tmp = v(y, x);
 				std::cout << " " << tmp.a;
 			}
 		}
 		std::cout << std::endl;
 	} // ///////////////////////////////////////////////////////////////////////////////////
-	void dump() { dump(*v); }
+	void dump() {
+		dump(*v);
+	} // ///////////////////////////////////////////////////////////////////////////////////
+	void dumpYX(const av2& v) {
+		std::cout << "   y:" << v.extent[0] << " x:" << v.extent[1];
+		for (int y = 0; y < v.extent[0]; y++) {
+			std::cout << std::endl;
+			for (int x = 0; x < v.extent[1]; x++) {
+				vtype tmp = v(y, x);
+				if (tmp.xy.y >= 0)
+					std::cout << " ";
+				std::cout << tmp.xy.y << ".";
+				if (tmp.xy.x >= 0)
+					std::cout << " ";
+				std::cout << tmp.xy.x << "\t";
+			}
+		}
+		std::cout << std::endl;
+	} // ///////////////////////////////////////////////////////////////////////////////////
+	void dumpYX() {
+		dumpYX(*v);
+	} // ///////////////////////////////////////////////////////////////////////////////////
+
 
 }; // **************************************************************************
 
