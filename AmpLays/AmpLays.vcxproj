@@ -170,6 +170,9 @@
     <ClInclude Include="Shifter.h" />
     <ClInclude Include="XY.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Lays17x9.odg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
