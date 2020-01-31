@@ -24,7 +24,9 @@ void CppAmpMethod0() {
 	Lays lays(szy, szx, vBase); // main init
 	lays.lay0.dumpall();
 	assert(lays.size() > 3);
-	parallel_for_each(lays.v(1)->extent, ProcA2(lays.lay0.Shift(), *lays.v(1)));
+	lays.runShift();
+
+	parallel_for_each(lays.v(1)->extent, ProcA2(lays.getShiftV(), *lays.v(1)));	// TODO: shift remove
 	for(int nlay = 2; nlay < lays.size(); nlay++) {
 		LayBase* prev = lays[nlay - 1];
 		LayBase* cur = lays[nlay];
@@ -35,11 +37,12 @@ void CppAmpMethod0() {
 
 	int nprevlast = int(lays.size()) - 2;
 	parallel_for_each(lays.laylast.v->extent, ProcT2Last(*lays.laylast.v, *lays.v(nprevlast)));
-	for (int nlay = nprevlast; nlay > 0; nlay--) {
+	for (int nlay = nprevlast; nlay > 1; nlay--) {
 		LayBase* cur = lays[nlay];
 		LayBase* next = lays[nlay - 1];
 		parallel_for_each(cur->v->extent, ProcT2(*cur->v, *next->v));
 	}
+	parallel_for_each(lays[1]->v->extent, ProcT2(*lays[1]->v, lays.getShiftV()));
 	// TODO: mover here 
 	lays.dumpYX();
 } // //////////////////////////////////////////////////////////////////////////

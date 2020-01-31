@@ -32,6 +32,12 @@ public:
 	av2* v(int n_lay) {
 		return this->operator[](n_lay)->v;
 	} // //////////////////////////////////////////////////////////////
+	void runShift() {
+		lay0.runShift();
+	} // //////////////////////////////////////////////////////////////
+	av2 getShiftV() {	// do shift lay0
+		return lay0.getShiftV();
+	} // //////////////////////////////////////////////////////////////
 	void dump() {
 		lay0.dump();
 		for (int n = 0; n < vlays.size(); n++)
@@ -40,7 +46,7 @@ public:
 	} // //////////////////////////////////////////////////////////////
 	void dumpYX(bool restrict = true, bool all = true) {
 		laylast.dumpYX();
-		for (int n = vlays.size(); n > 0; )
+		for (int n = int(vlays.size()); n > 0; )
 			vlays[--n].dumpYX();
 		if (restrict)
 			lay0.dumpYX();
