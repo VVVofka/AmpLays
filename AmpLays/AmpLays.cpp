@@ -26,23 +26,23 @@ void CppAmpMethod0() {
 	assert(lays.size() > 3);
 	lays.runShift();
 
-	parallel_for_each(lays.v(1)->extent, ProcA2(lays.getShiftV(), *lays.v(1)));	// TODO: shift remove
+	parallel_for_each(lays.v(1)->extent, ProcA(lays.getShiftV(), *lays.v(1)));	// TODO: shift remove
 	for(int nlay = 2; nlay < lays.size(); nlay++) {
 		LayBase* prev = lays[nlay - 1];
 		LayBase* cur = lays[nlay];
 		//_RPT5(0, "%d  %d*%d %d*%d\n", n, prev->szy(), prev->szx(), cur->szy(), cur->szx());
-		parallel_for_each(cur->v->extent, ProcA2(*prev->v, *cur->v));
+		parallel_for_each(cur->v->extent, ProcA(*prev->v, *cur->v));
 	}
 	lays.dump();
 
 	int nprevlast = int(lays.size()) - 2;
-	parallel_for_each(lays.laylast.v->extent, ProcT2Last(*lays.laylast.v, *lays.v(nprevlast)));
+	parallel_for_each(lays.laylast.v->extent, ProcTLast(*lays.laylast.v, *lays.v(nprevlast)));
 	for (int nlay = nprevlast; nlay > 1; nlay--) {
 		LayBase* cur = lays[nlay];
 		LayBase* next = lays[nlay - 1];
-		parallel_for_each(cur->v->extent, ProcT2(*cur->v, *next->v));
+		parallel_for_each(cur->v->extent, ProcT(*cur->v, *next->v));
 	}
-	parallel_for_each(lays[1]->v->extent, ProcT2(*lays[1]->v, lays.getShiftV()));
+	parallel_for_each(lays[1]->v->extent, ProcT0(*lays[1]->v, lays.getShiftV()));
 	// TODO: mover here 
 	lays.dumpYX();
 } // //////////////////////////////////////////////////////////////////////////
