@@ -24,7 +24,7 @@ public:
 			std::cout << std::endl;
 			for (int x = 0; x < v.extent[1]; x++) {
 				vtype tmp = v(y, x);
-				std::cout << " " << tmp.a;
+				std::cout << " " << (tmp.a & 1);
 			}
 		}
 		std::cout << std::endl;

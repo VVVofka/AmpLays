@@ -77,7 +77,7 @@ void dumpV(const std::vector<vtype> v, int szy, int szx) {
 	for(int y = 0; y < szy; y++) {
 		std::cout << std::endl;
 		for(int x = 0; x < szx; x++) {
-			std::cout << " " << v[y * szx + x].a;
+			std::cout << " " << (v[y * szx + x].a & 1);
 		}
 	}
 	std::cout << std::endl;
@@ -86,7 +86,7 @@ void dumpv(const vtype* v, int szy, int szx) {
 	for(int y = 0; y < szy; y++) {
 		std::cout << std::endl;
 		for(int x = 0; x < szx; x++) {
-			std::cout << " " << v[y * szx + x].a;
+			std::cout << " " << (v[y * szx + x].a & 1);
 		}
 	}
 	std::cout << std::endl;
@@ -97,7 +97,7 @@ void dumpv(const av2& v) {
 		std::cout << std::endl;
 		for(int x = 0; x < v.extent[1]; x++) {
 			vtype tmp = v(y, x);
-			std::cout << " " << tmp.a;
+			std::cout << " " << (tmp.a & 1);
 		}
 	}
 	std::cout << std::endl;
