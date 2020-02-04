@@ -2,11 +2,14 @@
 #include <amp.h>
 #include <cassert>
 #include "XY.h"
-//typedef int vtype;
 struct vtype {
-	int a = 0;
+	// bit 0: exist
+	// bit 1: intent(inertion)
+	// bits 2,3,4: direct
+	unsigned int a = 0;
+
 	YX xy;
-};
+}; // ********************************************************************************
 typedef concurrency::array_view<vtype, 2> av2;
 typedef concurrency::array_view<const vtype, 2> avc2;
 
