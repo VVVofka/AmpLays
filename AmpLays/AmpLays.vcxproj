@@ -168,6 +168,7 @@
     <ClInclude Include="Lays.h" />
     <ClInclude Include="Procs.h" />
     <ClInclude Include="Shifter.h" />
+    <ClInclude Include="vMoveIntend.h" />
     <ClInclude Include="XY.h" />
   </ItemGroup>
   <ItemGroup>
